@@ -15,7 +15,7 @@
             <column name="name" type="VARCHAR(255)"/>
             <column name="surname" type="VARCHAR(255)"/>
             <column name="dob" type="DATE"/>
-            <column name="status" type="VARCHAR(255)">
+            <column name="statusDriver" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="sex" type="VARCHAR(255)">

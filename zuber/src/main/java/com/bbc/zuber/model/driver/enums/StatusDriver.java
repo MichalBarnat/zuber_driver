@@ -1,6 +1,6 @@
 package com.bbc.zuber.model.driver.enums;
 
-public enum Status {
+public enum StatusDriver {
     AVAILABLE,
     UNAVAILABLE
 }

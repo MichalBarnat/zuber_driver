@@ -1,7 +1,7 @@
 package com.bbc.zuber.model.driver;
 
 import com.bbc.zuber.model.driver.enums.Sex;
-import com.bbc.zuber.model.driver.enums.Status;
+import com.bbc.zuber.model.driver.enums.StatusDriver;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,7 @@ public class Driver {
     private String surname;
     private String dob;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private StatusDriver statusDriver;
     @Enumerated(EnumType.STRING)
     private Sex sex;
     @Email(message = "Wrong email pattern. Check it once again!")
