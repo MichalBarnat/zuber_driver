@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class DriverService {
@@ -42,20 +44,35 @@ public class DriverService {
         driverRepository.deleteAll();
     }
 
+//    @Transactional
+//    public Driver editDriver(long id, UpdateDriverCommand command) {
+//        return driverRepository.findById(id)
+//                .map(driverToEdit -> {
+//                    driverToEdit.setName(command.getName());
+//                    driverToEdit.setSurname(command.getSurname());
+//                    driverToEdit.setDob(command.getDob());
+//                    driverToEdit.setStatusDriver(command.getStatusDriver());
+//                    driverToEdit.setSex(command.getSex());
+//                    driverToEdit.setEmail(command.getEmail());
+//                    return driverToEdit;
+//                })
+//                .orElseThrow(() -> new DriverNotFoundException(String.format("Driver with id: %s not found!", id)));
+//    }
+
     @Transactional
-    public Driver editDriver(long id, UpdateDriverCommand command) {
-        return driverRepository.findById(id)
-                .map(driverToEdit -> {
-                    driverToEdit.setName(command.getName());
-                    driverToEdit.setSurname(command.getSurname());
-                    driverToEdit.setDob(command.getDob());
-                    driverToEdit.setStatusDriver(command.getStatusDriver());
-                    driverToEdit.setSex(command.getSex());
-                    driverToEdit.setEmail(command.getEmail());
-                    return driverToEdit;
-                })
-                .orElseThrow(() -> new DriverNotFoundException(String.format("Driver with id: %s not found!", id)));
+    public Driver edit(Driver driver) {
+        return driverRepository.findById(driver.getId())
+                .map(userToEdit -> {
+                    Optional.ofNullable(driver.getName()).ifPresent(userToEdit::setName);
+                    Optional.ofNullable(driver.getSurname()).ifPresent(userToEdit::setSurname);
+                    Optional.ofNullable(driver.getDob()).ifPresent(userToEdit::setDob);
+                    Optional.ofNullable(driver.getStatusDriver());
+                    Optional.ofNullable(driver.getSex()).ifPresent(userToEdit::setSex);
+                    Optional.ofNullable(driver.getEmail()).ifPresent(userToEdit::setEmail);
+                    return userToEdit;
+                }).orElseThrow(() -> new DriverNotFoundException());
     }
+
 
 //    public void withdraw(Long id, BigDecimal amount) {
 //        Driver account = findById(id);
