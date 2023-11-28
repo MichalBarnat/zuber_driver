@@ -16,6 +16,7 @@ public class DriverToDriverDtoConverter implements Converter<Driver, DriverDto> 
         Driver command = mappingContext.getSource();
 
         return DriverDto.builder()
+                .id(command.getId())
                 .uuid(UUID.randomUUID())
                 .name(command.getName())
                 .sex(command.getSex())
