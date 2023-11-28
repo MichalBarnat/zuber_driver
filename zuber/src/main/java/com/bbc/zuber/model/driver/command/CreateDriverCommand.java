@@ -1,4 +1,4 @@
-package com.bbc.zuber.model.driver.commands;
+package com.bbc.zuber.model.driver.command;
 
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
