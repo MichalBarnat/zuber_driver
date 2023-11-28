@@ -2,7 +2,6 @@ package com.bbc.zuber.service;
 
 import com.bbc.zuber.exception.DriverNotFoundException;
 import com.bbc.zuber.model.driver.Driver;
-import com.bbc.zuber.model.driver.command.UpdateDriverCommand;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
 import com.bbc.zuber.repository.DriverRepository;
 import jakarta.transaction.Transactional;
