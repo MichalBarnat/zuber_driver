@@ -1,6 +1,7 @@
 package com.bbc.zuber.configuration.kafka;
 
 import com.bbc.zuber.model.driver.Driver;
+import com.bbc.zuber.model.rideassignmentresponse.RideAssignmentResponse;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,6 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Configuration
 public class KafkaProducerConfig {
@@ -29,22 +29,23 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, Driver> producerFactory() {
+    public ProducerFactory<String, Driver> driverProducerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, Driver> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, Driver> dirverKafkaTemplate() {
+        return new KafkaTemplate<>(driverProducerFactory());
     }
 
     @Bean
-    public ProducerFactory<String, UUID> uuidProducerFactory() {
+    public ProducerFactory<String, RideAssignmentResponse> rideAssignmentResponseProducerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, UUID> uuidKafkaTemplate() {
-        return new KafkaTemplate<>(uuidProducerFactory());
+    public KafkaTemplate<String, RideAssignmentResponse> rideAssignmentResponseKafkaTemplate() {
+        return new KafkaTemplate<>(rideAssignmentResponseProducerFactory());
     }
+
 }

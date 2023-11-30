@@ -23,7 +23,6 @@ public class DriverController {
     private final DriverService driverService;
     private final ModelMapper modelMapper;
     private final KafkaTemplate<String, Driver> kafkaTemplate;
-    private final KafkaTemplate<String, UUID> uuidKafkaTemplate;
 
     @GetMapping("/{id}")
     public Driver getDriver(@PathVariable Long id) {
@@ -41,7 +40,6 @@ public class DriverController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         driverService.deleteById(id);
-        uuidKafkaTemplate.send("driver-deleted", getDriver(id).getUuid());
         return ResponseEntity.noContent().build();
     }
 
