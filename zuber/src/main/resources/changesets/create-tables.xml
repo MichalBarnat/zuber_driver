@@ -26,16 +26,26 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="2" author="your_username2">
-        <createTable tableName="ride_requests_information">
+    <changeSet id="2" author="michal-barnat">
+        <createTable tableName="ride_assignments">
             <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="uuid" type="UUID">
-                <constraints nullable="false" unique="true"/>
+            <column name="ride_requestuuid" type="UUID">
+                <constraints nullable="false"/>
             </column>
-            <column name="pick_up_location" type="VARCHAR(255)"/>
-            <column name="drop_off_location" type="VARCHAR(255)"/>
+            <column name="driveruuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pick_up_location" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="drop_off_location" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
