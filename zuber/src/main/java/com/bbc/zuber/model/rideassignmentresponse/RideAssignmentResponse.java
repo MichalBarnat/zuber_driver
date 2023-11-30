@@ -20,3 +20,4 @@ public class RideAssignmentResponse {
     private Long id;
     private Boolean accepted;
 }
+//todo sprobowac przeniesc funkcjonalnosc bez tej klasy

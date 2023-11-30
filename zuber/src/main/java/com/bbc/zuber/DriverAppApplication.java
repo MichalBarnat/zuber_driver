@@ -10,4 +10,8 @@ public class DriverAppApplication {
 		SpringApplication.run(DriverAppApplication.class, args);
 	}
 
+	// TODO zestawienie zarobkow, platnosci
+	// dodanie auta
+	// biblio do info o aucie <optional> https://api-ninjas.com/api/cars
+	// liquibase testowe dane
 }
