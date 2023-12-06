@@ -20,6 +20,7 @@ public class UpdateDriverCommandToDriverConverter implements Converter<UpdateDri
                 .statusDriver(command.getStatusDriver())
                 .sex(command.getSex())
                 .email(command.getEmail())
+                .location(command.getLocation())
                 .build();
     }
 }

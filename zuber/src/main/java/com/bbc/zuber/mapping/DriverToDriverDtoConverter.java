@@ -20,6 +20,7 @@ public class DriverToDriverDtoConverter implements Converter<Driver, DriverDto> 
                 .uuid(UUID.randomUUID())
                 .name(command.getName())
                 .sex(command.getSex())
+                .location(command.getLocation())
                 .build();
     }
 }

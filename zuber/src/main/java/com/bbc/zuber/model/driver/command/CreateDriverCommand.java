@@ -16,4 +16,5 @@ public class CreateDriverCommand {
     private StatusDriver statusDriver;
     private Sex sex;
     private String email;
+    private String location;
 }

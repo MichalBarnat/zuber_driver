@@ -13,4 +13,5 @@ public class DriverDto {
     UUID uuid;
     String name;
     Sex sex;
+    String location;
 }

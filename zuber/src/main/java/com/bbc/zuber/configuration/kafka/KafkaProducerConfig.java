@@ -1,9 +1,9 @@
 package com.bbc.zuber.configuration.kafka;
 
-import com.bbc.zuber.model.driver.Driver;
-import com.bbc.zuber.model.rideassignmentresponse.RideAssignmentResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,10 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServer;
 
-    public Map<String, Object> producerConfig() {
+    @Autowired
+    ObjectMapper objectMapper;
+
+    public Map<String, Object> producerConfig(){
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -29,23 +32,18 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, Driver> driverProducerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfig());
+    public ProducerFactory<String, Object> producerFactory() {
+        Map<String, Object> producerConfigs = producerConfig();
+        return new DefaultKafkaProducerFactory<>(
+                producerConfigs,
+                new StringSerializer(),
+                new JsonSerializer<>(objectMapper)
+        );
     }
 
     @Bean
-    public KafkaTemplate<String, Driver> dirverKafkaTemplate() {
-        return new KafkaTemplate<>(driverProducerFactory());
-    }
-
-    @Bean
-    public ProducerFactory<String, RideAssignmentResponse> rideAssignmentResponseProducerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfig());
-    }
-
-    @Bean
-    public KafkaTemplate<String, RideAssignmentResponse> rideAssignmentResponseKafkaTemplate() {
-        return new KafkaTemplate<>(rideAssignmentResponseProducerFactory());
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 
 }

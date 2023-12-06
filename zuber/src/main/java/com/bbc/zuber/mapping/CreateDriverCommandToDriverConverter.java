@@ -23,6 +23,7 @@ public class CreateDriverCommandToDriverConverter implements Converter<CreateDri
                 .statusDriver(command.getStatusDriver())
                 .sex(command.getSex())
                 .email(command.getEmail())
+                .location(command.getLocation())
                 .build();
     }
 }

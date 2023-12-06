@@ -5,6 +5,8 @@ import com.bbc.zuber.model.driver.command.CreateDriverCommand;
 import com.bbc.zuber.model.driver.command.UpdateDriverCommand;
 import com.bbc.zuber.model.driver.dto.DriverDto;
 import com.bbc.zuber.service.DriverService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -22,7 +24,8 @@ public class DriverController {
 
     private final DriverService driverService;
     private final ModelMapper modelMapper;
-    private final KafkaTemplate<String, Driver> kafkaTemplate;
+    private final ObjectMapper objectMapper;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @GetMapping("/{id}")
     public Driver getDriver(@PathVariable Long id) {
@@ -30,10 +33,11 @@ public class DriverController {
     }
 
     @PostMapping
-    public ResponseEntity<DriverDto> save(@RequestBody CreateDriverCommand command) {
+    public ResponseEntity<DriverDto> save(@RequestBody CreateDriverCommand command) throws JsonProcessingException {
         Driver driverToSave = modelMapper.map(command, Driver.class);
         Driver savedDriver = driverService.save(driverToSave);
-        kafkaTemplate.send("driver-registration", savedDriver);
+        String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
+        kafkaTemplate.send("driver-registration", savedDriverJson);
         return ResponseEntity.ok(modelMapper.map(savedDriver, DriverDto.class));
     }
 
@@ -44,10 +48,11 @@ public class DriverController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DriverDto> edit(@PathVariable Long id, @RequestBody UpdateDriverCommand command) {
+    public ResponseEntity<DriverDto> edit(@PathVariable Long id, @RequestBody UpdateDriverCommand command) throws JsonProcessingException {
         Driver driverToEdit = modelMapper.map(command, Driver.class);
         driverToEdit.setId(id);
         Driver editedDriver = driverService.edit(driverToEdit);
+        String editedDriverJson = objectMapper.writeValueAsString(editedDriver);
         kafkaTemplate.send("driver-edited", editedDriver);
         return ResponseEntity.ok(modelMapper.map(editedDriver, DriverDto.class));
     }

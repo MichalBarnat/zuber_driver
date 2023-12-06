@@ -31,5 +31,5 @@ public class Driver {
     private Sex sex;
     @Email(message = "Wrong email pattern. Check it once again!")
     private String email;
-
+    private String location;
 }
