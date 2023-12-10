@@ -1,4 +1,4 @@
-package com.bbc.zuber.mapping;
+package com.bbc.zuber.mappings.driver;
 
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.driver.command.CreateDriverCommand;
@@ -24,6 +24,7 @@ public class CreateDriverCommandToDriverConverter implements Converter<CreateDri
                 .sex(command.getSex())
                 .email(command.getEmail())
                 .location(command.getLocation())
+                .car(command.getCar())
                 .build();
     }
 }

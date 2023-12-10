@@ -1,7 +1,9 @@
 package com.bbc.zuber.model.driver;
 
+import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Driver {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,4 +33,7 @@ public class Driver {
     @Email(message = "Wrong email pattern. Check it once again!")
     private String email;
     private String location;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CAR_ID", referencedColumnName = "id")
+    private Car car;
 }

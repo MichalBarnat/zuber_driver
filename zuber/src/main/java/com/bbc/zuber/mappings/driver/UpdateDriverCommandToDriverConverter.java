@@ -1,4 +1,4 @@
-package com.bbc.zuber.mapping;
+package com.bbc.zuber.mappings.driver;
 
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.driver.command.UpdateDriverCommand;

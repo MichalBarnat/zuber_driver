@@ -1,4 +1,4 @@
-package com.bbc.zuber.mapping;
+package com.bbc.zuber.mappings.driver;
 
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.driver.dto.DriverDto;
@@ -13,14 +13,15 @@ public class DriverToDriverDtoConverter implements Converter<Driver, DriverDto> 
 
     @Override
     public DriverDto convert(MappingContext<Driver, DriverDto> mappingContext) {
-        Driver command = mappingContext.getSource();
+        Driver driver = mappingContext.getSource();
 
         return DriverDto.builder()
-                .id(command.getId())
+                .id(driver.getId())
                 .uuid(UUID.randomUUID())
-                .name(command.getName())
-                .sex(command.getSex())
-                .location(command.getLocation())
+                .name(driver.getName())
+                .sex(driver.getSex())
+                .location(driver.getLocation())
+                .car(driver.getCar())
                 .build();
     }
 }
