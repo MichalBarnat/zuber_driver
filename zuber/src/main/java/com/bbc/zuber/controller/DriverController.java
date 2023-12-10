@@ -36,18 +36,14 @@ public class DriverController {
     @PostMapping
     public ResponseEntity<DriverDto> save(@RequestBody CreateDriverCommand command) throws JsonProcessingException {
         Driver driverToSave = modelMapper.map(command, Driver.class);
+
         Car car = modelMapper.map(command.getCarData(), Car.class);
         driverToSave.setCar(car);
         car.setDriver(driverToSave);
 
-
         Driver savedDriver = driverService.save(driverToSave);
         String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
-        String savedCarJson = objectMapper.writeValueAsString(car);
-        //todo wyslac do serwera driver json i poprawnie zapisac dane
-        System.out.println("SAVED DRIVER JSON: " + savedDriverJson);
-        System.out.println("SAVED CAR JSON:" + savedCarJson);
-        //kafkaTemplate.send("driver-registration", savedDriverJson);
+        kafkaTemplate.send("driver-registration", savedDriverJson);
         return ResponseEntity.ok(modelMapper.map(savedDriver, DriverDto.class));
     }
 
