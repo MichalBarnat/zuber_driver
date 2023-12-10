@@ -4,49 +4,61 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
-    <changeSet id="1" author="your_username">
-        <createTable tableName="drivers">
+    <changeSet id="1" author="michal-barnat">
+        <createTable tableName="cars">
             <column name="id" type="BIGINT">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_cars"/>
             </column>
             <column name="uuid" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="surname" type="VARCHAR(255)"/>
-            <column name="dob" type="DATE"/>
-            <column name="status_driver" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="brand" type="VARCHAR(255)"/>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="production_year" type="INTEGER"/>
+            <column name="engine" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="size" type="INTEGER"/>
+            <column name="plate_num" type="VARCHAR(255)"/>
+            <column name="driver_uuid" type="UUID">
+                <constraints nullable="true"/>
             </column>
-            <column name="sex" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="email" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="car_uuid" type="UUID"/>
         </createTable>
     </changeSet>
     <changeSet id="2" author="michal-barnat">
-        <createTable tableName="ride_assignments">
+        <createTable tableName="drivers">
             <column name="id" type="BIGINT">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_drivers"/>
             </column>
-            <column name="ride_requestuuid" type="UUID">
-                <constraints nullable="false"/>
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="driveruuid" type="UUID">
-                <constraints nullable="false"/>
-            </column>
-            <column name="pick_up_location" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="drop_off_location" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="dob" type="VARCHAR(255)"/>
+            <column name="status_driver" type="VARCHAR(255)"/>
+            <column name="sex" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="location" type="VARCHAR(255)"/>
+            <column name="car_uuid" type="UUID">
+                <constraints nullable="true"/>
             </column>
         </createTable>
+    </changeSet>
+    <!-- Dodawanie klucza obcego do tabeli cars -->
+    <changeSet id="3" author="michal-barnat">
+        <addForeignKeyConstraint baseTableName="cars"
+                                 baseColumnNames="driver_uuid"
+                                 constraintName="fk_cars_driver"
+                                 referencedTableName="drivers"
+                                 referencedColumnNames="uuid"/>
+    </changeSet>
+
+    <!-- Dodawanie klucza obcego do tabeli drivers -->
+    <changeSet id="4" author="michal-barnat">
+        <addForeignKeyConstraint baseTableName="drivers"
+                                 baseColumnNames="car_uuid"
+                                 constraintName="fk_drivers_car"
+                                 referencedTableName="cars"
+                                 referencedColumnNames="uuid"/>
     </changeSet>
 </databaseChangeLog>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="michal" id="1">
+        <loadData encoding="UTF-8" file="changesets/data/cars.csv" quotchar="&quot;" separator="," tableName="cars">
+            <column header="id" name="id"/>
+            <column header="uuid" name="uuid"/>
+            <column header="brand" name="brand"/>
+            <column header="model" name="model"/>
+            <column header="production_year" name="production_year"/>
+            <column header="engine" name="engine"/>
+            <column header="type" name="type"/>
+            <column header="size" name="size"/>
+            <column header="plate_num" name="plate_num"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="michal" id="2">
+        <loadData encoding="UTF-8" file="changesets/data/drivers.csv" quotchar="&quot;" separator="," tableName="drivers">
+            <column header="id" name="id"/>
+            <column header="uuid" name="uuid"/>
+            <column header="name" name="name"/>
+            <column header="surname" name="surname"/>
+            <column header="dob" name="dob"/>
+            <column header="status_driver" name="status_driver"/>
+            <column header="sex" name="sex"/>
+            <column header="email" name="email"/>
+            <column header="location" name="location"/>
+        </loadData>
+    </changeSet>
+    <!-- Dodanie kluczy obcych do tabeli cars -->
+    <changeSet author="michal" id="3">
+        <sql>
+            UPDATE cars SET driver_uuid = 'ce7a9a6e-b4fd-4a1d-8e79-ea5a3e2d6d95' WHERE id = 1;
+            UPDATE cars SET driver_uuid = 'a5c8d2f9-2f4a-4b5d-9b5c-1af0e4f7a24e' WHERE id = 2;
+            UPDATE cars SET driver_uuid = '7e5a77fd-8f73-4d29-8c8c-1f96e0b4e3d7' WHERE id = 3;
+            UPDATE cars SET driver_uuid = 'b2a5b5e3-aa1c-4e4b-8f3b-088b656047b3' WHERE id = 4;
+            UPDATE cars SET driver_uuid = '3f7ae1f2-4bfb-4c9f-a5c9-4d0d8b7c2e88' WHERE id = 5;
+        </sql>
+    </changeSet>
+
+    <!-- Dodanie kluczy obcych do tabeli drivers -->
+    <changeSet author="michal" id="4">
+        <sql>
+            UPDATE drivers SET car_uuid = '541f9c38-8c0b-4e9d-8212-93d56ca91484' WHERE id = 1;
+            UPDATE drivers SET car_uuid = 'fdf8b9d6-9fc8-4007-a23a-659ad4103e04' WHERE id = 2;
+            UPDATE drivers SET car_uuid = 'e2452860-32aa-4e14-b4ff-079a3f900d37' WHERE id = 3;
+            UPDATE drivers SET car_uuid = 'd2e102ee-0530-4b95-8458-037be3f1f1ab' WHERE id = 4;
+            UPDATE drivers SET car_uuid = '72f466e1-1202-4efe-8a9d-498cc513a8cc' WHERE id = 5;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,6 @@
+id,uuid,name,surname,dob,status_driver,sex,email,location
+1,ce7a9a6e-b4fd-4a1d-8e79-ea5a3e2d6d95,Kazek,Hulaj,1982-02-18,UNAVAILABLE,MALE,kazek.hulaj@example.com,"Tczewska 22, 83-032 Pszczółki"
+2,a5c8d2f9-2f4a-4b5d-9b5c-1af0e4f7a24e,Ania,Siorpa,1970-11-23,AVAILABLE,FEMALE,ania.siorpa@example.com,"Bolesława Chrobrego 6, 73-108 Kobylanka"
+3,7e5a77fd-8f73-4d29-8c8c-1f96e0b4e3d7,Robert,Reniro,1975-03-10,AVAILABLE,MALE,robert.reniro@example.com,"Rybaki 1, 18-400 Łomża"
+4,b2a5b5e3-aa1c-4e4b-8f3b-088b656047b3,Sara,Pirno,1995-07-12,AVAILABLE,FEMALE,sara.pirno@example.com,"Aleja Wolności 12, 62-800 Kalisz"
+5,3f7ae1f2-4bfb-4c9f-a5c9-4d0d8b7c2e88,Dobromir,Dobry,1998-01-20,AVAILABLE,MALE,dobromir.dobry@example.com,"Śląska 55A, 22-400 Zamość"
