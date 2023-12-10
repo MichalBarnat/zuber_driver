@@ -1,5 +1,6 @@
 package com.bbc.zuber.model.driver.command;
 
+import com.bbc.zuber.model.car.command.CarDataCommand;
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
 import lombok.*;
@@ -17,4 +18,5 @@ public class CreateDriverCommand {
     private Sex sex;
     private String email;
     private String location;
+    private CarDataCommand carData;
 }

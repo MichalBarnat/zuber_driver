@@ -1,5 +1,6 @@
 package com.bbc.zuber.controller;
 
+import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.driver.command.CreateDriverCommand;
 import com.bbc.zuber.model.driver.command.UpdateDriverCommand;
@@ -35,9 +36,18 @@ public class DriverController {
     @PostMapping
     public ResponseEntity<DriverDto> save(@RequestBody CreateDriverCommand command) throws JsonProcessingException {
         Driver driverToSave = modelMapper.map(command, Driver.class);
+        Car car = modelMapper.map(command.getCarData(), Car.class);
+        driverToSave.setCar(car);
+        car.setDriver(driverToSave);
+
+
         Driver savedDriver = driverService.save(driverToSave);
         String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
-        kafkaTemplate.send("driver-registration", savedDriverJson);
+        String savedCarJson = objectMapper.writeValueAsString(car);
+        //todo wyslac do serwera driver json i poprawnie zapisac dane
+        System.out.println("SAVED DRIVER JSON: " + savedDriverJson);
+        System.out.println("SAVED CAR JSON:" + savedCarJson);
+        //kafkaTemplate.send("driver-registration", savedDriverJson);
         return ResponseEntity.ok(modelMapper.map(savedDriver, DriverDto.class));
     }
 
