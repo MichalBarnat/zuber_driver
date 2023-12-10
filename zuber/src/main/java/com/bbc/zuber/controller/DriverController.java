@@ -44,6 +44,7 @@ public class DriverController {
         Driver savedDriver = driverService.save(driverToSave);
         String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
         String savedCarJson = objectMapper.writeValueAsString(car);
+        //todo wyslac do serwera driver json i poprawnie zapisac dane
         System.out.println("SAVED DRIVER JSON: " + savedDriverJson);
         System.out.println("SAVED CAR JSON:" + savedCarJson);
         //kafkaTemplate.send("driver-registration", savedDriverJson);

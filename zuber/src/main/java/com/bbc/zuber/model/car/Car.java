@@ -32,7 +32,7 @@ public class Car {
     private int size;
     private String plateNum;
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
-    @JoinColumn(name = "DRIVER_ID", referencedColumnName = "id")
+    @JoinColumn(name = "DRIVER_UUID", referencedColumnName = "uuid")
     @JsonIgnore
     private Driver driver;
 }

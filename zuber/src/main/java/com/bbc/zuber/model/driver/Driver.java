@@ -3,7 +3,6 @@ package com.bbc.zuber.model.driver;
 import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -34,6 +33,6 @@ public class Driver {
     private String email;
     private String location;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CAR_ID", referencedColumnName = "id")
+    @JoinColumn(name = "CAR_UUID", referencedColumnName = "uuid")
     private Car car;
 }
