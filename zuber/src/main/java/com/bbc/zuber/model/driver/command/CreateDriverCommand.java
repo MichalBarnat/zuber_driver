@@ -19,6 +19,5 @@ public class CreateDriverCommand {
     private Sex sex;
     private String email;
     private String location;
-    private Car car;
     private CarDataCommand carData;
 }

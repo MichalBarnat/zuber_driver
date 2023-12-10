@@ -43,7 +43,10 @@ public class DriverController {
 
         Driver savedDriver = driverService.save(driverToSave);
         String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
-        kafkaTemplate.send("driver-registration", savedDriverJson);
+        String savedCarJson = objectMapper.writeValueAsString(car);
+        System.out.println("SAVED DRIVER JSON: " + savedDriverJson);
+        System.out.println("SAVED CAR JSON:" + savedCarJson);
+        //kafkaTemplate.send("driver-registration", savedDriverJson);
         return ResponseEntity.ok(modelMapper.map(savedDriver, DriverDto.class));
     }
 
