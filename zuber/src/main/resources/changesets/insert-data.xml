@@ -51,4 +51,32 @@
             UPDATE drivers SET car_uuid = '72f466e1-1202-4efe-8a9d-498cc513a8cc' WHERE id = 5;
         </sql>
     </changeSet>
+
+
+    <changeSet id="5" author="michal">
+        <sql>
+            CREATE SEQUENCE IF NOT EXISTS cars_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="6" author="michal">
+        <sql>
+            CREATE SEQUENCE IF NOT EXISTS drivers_seq;
+        </sql>
+    </changeSet>
+
+    <changeSet id="7" author="michal">
+        <sql>
+            SELECT setval('cars_seq', COALESCE((SELECT MAX(id)+1 FROM cars), 1), false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="8" author="michal">
+        <sql>
+            SELECT setval('drivers_seq', COALESCE((SELECT MAX(id)+1 FROM drivers), 1), false);
+        </sql>
+    </changeSet>
+
+
+
 </databaseChangeLog>

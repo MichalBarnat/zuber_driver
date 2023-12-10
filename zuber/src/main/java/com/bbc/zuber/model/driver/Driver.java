@@ -19,7 +19,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Driver {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driver_seq")
+    @SequenceGenerator(name = "driver_seq", sequenceName = "drivers_seq", allocationSize = 1)
     private Long id;
     private UUID uuid;
     private String name;

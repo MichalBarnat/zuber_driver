@@ -19,7 +19,8 @@ import java.util.UUID;
 @Builder
 public class Car {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cars_seq")
+    @SequenceGenerator(name = "cars_seq", sequenceName = "cars_seq", allocationSize = 1)
     private Long id;
     private UUID uuid;
     private String brand;
