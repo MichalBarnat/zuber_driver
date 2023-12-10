@@ -24,6 +24,7 @@
             <column name="email" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="car_uuid" type="UUID"/>
         </createTable>
     </changeSet>
     <changeSet id="2" author="michal-barnat">

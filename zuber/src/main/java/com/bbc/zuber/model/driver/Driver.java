@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Driver {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private UUID uuid;
     private String name;
