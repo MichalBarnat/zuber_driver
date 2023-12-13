@@ -31,5 +31,4 @@ public class RideAssignmentService {
         }
         return save(rideAssignment);
     }
-
 }
