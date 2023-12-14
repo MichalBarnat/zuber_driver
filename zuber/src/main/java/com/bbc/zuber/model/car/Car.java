@@ -33,7 +33,6 @@ public class Car {
     private int size;
     private String plateNum;
     @OneToOne(cascade = CascadeType.ALL)
-    //@MapsId
     @JoinColumn(name = "DRIVER_UUID", referencedColumnName = "uuid")
     @JsonIgnore
     private Driver driver;

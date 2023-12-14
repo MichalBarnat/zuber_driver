@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity(name = "drivers")
@@ -25,7 +26,7 @@ public class Driver {
     private UUID uuid;
     private String name;
     private String surname;
-    private String dob;
+    private LocalDate dob;
     @Enumerated(EnumType.STRING)
     private StatusDriver statusDriver;
     @Enumerated(EnumType.STRING)

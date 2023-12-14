@@ -8,14 +8,13 @@ import com.bbc.zuber.model.driver.dto.DriverDto;
 import com.bbc.zuber.service.DriverService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/drivers")
@@ -34,7 +33,7 @@ public class DriverController {
     }
 
     @PostMapping
-    public ResponseEntity<DriverDto> save(@RequestBody CreateDriverCommand command) throws JsonProcessingException {
+    public ResponseEntity<DriverDto> save(@RequestBody @Valid CreateDriverCommand command) throws JsonProcessingException {
         Driver driverToSave = modelMapper.map(command, Driver.class);
         Car car = modelMapper.map(command.getCarData(), Car.class);
         car.setDriver(driverToSave);
@@ -42,7 +41,7 @@ public class DriverController {
 
         Driver savedDriver = driverService.save(driverToSave);
         String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
-        //kafkaTemplate.send("driver-registration", savedDriverJson);
+        kafkaTemplate.send("driver-registration", savedDriverJson);
         return ResponseEntity.ok(modelMapper.map(savedDriver, DriverDto.class));
     }
 
@@ -53,12 +52,12 @@ public class DriverController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DriverDto> edit(@PathVariable Long id, @RequestBody UpdateDriverCommand command) throws JsonProcessingException {
+    public ResponseEntity<DriverDto> edit(@PathVariable Long id, @RequestBody @Valid UpdateDriverCommand command) throws JsonProcessingException {
         Driver driverToEdit = modelMapper.map(command, Driver.class);
         driverToEdit.setId(id);
         Driver editedDriver = driverService.edit(driverToEdit);
         String editedDriverJson = objectMapper.writeValueAsString(editedDriver);
-        kafkaTemplate.send("driver-edited", editedDriver);
+        kafkaTemplate.send("driver-edited", editedDriverJson);
         return ResponseEntity.ok(modelMapper.map(editedDriver, DriverDto.class));
     }
 

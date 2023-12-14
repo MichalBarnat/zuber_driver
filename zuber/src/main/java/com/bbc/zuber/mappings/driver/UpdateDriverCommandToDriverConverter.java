@@ -6,6 +6,8 @@ import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class UpdateDriverCommandToDriverConverter implements Converter<UpdateDriverCommand, Driver> {
 
@@ -16,7 +18,7 @@ public class UpdateDriverCommandToDriverConverter implements Converter<UpdateDri
         return Driver.builder()
                 .name(command.getName())
                 .surname(command.getSurname())
-                .dob(command.getDob())
+                .dob(LocalDate.parse(command.getDob()))
                 .statusDriver(command.getStatusDriver())
                 .sex(command.getSex())
                 .email(command.getEmail())

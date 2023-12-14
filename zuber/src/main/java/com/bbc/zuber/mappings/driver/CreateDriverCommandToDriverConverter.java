@@ -3,12 +3,11 @@ package com.bbc.zuber.mappings.driver;
 import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.driver.command.CreateDriverCommand;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
-import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
@@ -35,7 +34,7 @@ public class CreateDriverCommandToDriverConverter implements Converter<CreateDri
                 .uuid(UUID.randomUUID())
                 .name(command.getName())
                 .surname(command.getSurname())
-                .dob(command.getDob())
+                .dob(LocalDate.parse(command.getDob()))
                 .statusDriver(command.getStatusDriver())
                 .sex(command.getSex())
                 .email(command.getEmail())
