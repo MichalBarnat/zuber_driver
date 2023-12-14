@@ -18,6 +18,7 @@ public class RideAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private UUID uuid;
     private UUID rideRequestUUID;
     private UUID driverUUID;
     private String pickUpLocation;

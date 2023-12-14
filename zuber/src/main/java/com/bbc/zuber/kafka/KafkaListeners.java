@@ -19,6 +19,8 @@ public class KafkaListeners {
     void userRegistrationListener(String rideAssignmentJson) throws JsonProcessingException {
         rideAssignmentService.save(objectMapper.readValue(rideAssignmentJson, RideAssignment.class));
         System.out.println("Successfully saved rideAssignment from zuber_server");
+
+        //todo dodac logger
     }
 
 }
