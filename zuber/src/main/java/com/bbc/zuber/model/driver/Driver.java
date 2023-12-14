@@ -5,6 +5,7 @@ import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,8 +25,11 @@ public class Driver {
     @SequenceGenerator(name = "driver_seq", sequenceName = "drivers_seq", allocationSize = 1)
     private Long id;
     private UUID uuid;
+    @NotNull
     private String name;
+    @NotNull
     private String surname;
+    @NotNull
     private LocalDate dob;
     @Enumerated(EnumType.STRING)
     private StatusDriver statusDriver;
@@ -33,6 +37,7 @@ public class Driver {
     private Sex sex;
     @Email(message = "Wrong email pattern. Check it once again!")
     private String email;
+    @NotNull
     private String location;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CAR_UUID", referencedColumnName = "uuid")
