@@ -4,11 +4,11 @@ import com.bbc.zuber.exception.DriverNotFoundException;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
 import com.bbc.zuber.repository.DriverRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,19 +18,23 @@ public class DriverService {
 
     private final DriverRepository driverRepository;
 
+    @Transactional(readOnly = true)
     public Driver getDriver(Long id) {
         return driverRepository.findById(id).orElseThrow(() -> new DriverNotFoundException(
                 String.format("Driver with id %d not found!", id)));
     }
 
+    @Transactional
     public Driver save(Driver driver) {
         return driverRepository.save(driver);
     }
 
+    @Transactional(readOnly = true)
     public Page<Driver> findAll(Pageable pageable) {
         return driverRepository.findAll(pageable);
     }
 
+    @Transactional
     public void deleteById(long id) {
         if (driverRepository.existsById(id)) {
             driverRepository.deleteById(id);
@@ -39,6 +43,7 @@ public class DriverService {
         }
     }
 
+    @Transactional
     public void deleteAll() {
         driverRepository.deleteAll();
     }
@@ -69,7 +74,7 @@ public class DriverService {
                     Optional.ofNullable(driver.getSex()).ifPresent(userToEdit::setSex);
                     Optional.ofNullable(driver.getEmail()).ifPresent(userToEdit::setEmail);
                     return userToEdit;
-                }).orElseThrow(() -> new DriverNotFoundException());
+                }).orElseThrow(DriverNotFoundException::new);
     }
 
 
@@ -84,7 +89,7 @@ public class DriverService {
 //    }
 
     @Transactional
-    public void setStatus(long id, StatusDriver statusDriver){
+    public void setStatus(long id, StatusDriver statusDriver) {
         Driver driver = driverRepository.findById(id)
                 .orElseThrow(DriverNotFoundException::new);
         driver.setStatusDriver(statusDriver);
