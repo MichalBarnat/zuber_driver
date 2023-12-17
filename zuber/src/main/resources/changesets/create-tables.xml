@@ -61,4 +61,42 @@
                                  referencedTableName="cars"
                                  referencedColumnNames="uuid"/>
     </changeSet>
+    <changeSet id="5" author="michal">
+        <createSequence sequenceName="ride_assignments_seq" incrementBy="1" startValue="1"/>
+    </changeSet>
+    <changeSet id="6" author="michal">
+        <createTable tableName="ride_assignments">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="ride_request_uuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="driver_uuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pick_up_location" type="VARCHAR(255)"/>
+            <column name="drop_off_location" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="michal">
+        <createSequence sequenceName="ride_assignment_response_seq" incrementBy="1" startValue="1"/>
+    </changeSet>
+    <changeSet id="8" author="michal">
+        <createTable tableName="ride_assignment_response">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="accepted" type="BOOLEAN">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

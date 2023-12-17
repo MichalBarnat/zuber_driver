@@ -16,12 +16,17 @@ import java.util.UUID;
 @NoArgsConstructor
 public class RideAssignment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ride_assignments_seq")
+    @SequenceGenerator(name = "ride_assignments_seq", sequenceName = "ride_assignments_seq", allocationSize = 1)
     private Long id;
     private UUID uuid;
+    @Column(name = "ride_request_uuid")
     private UUID rideRequestUUID;
+    @Column(name = "driver_uuid")
     private UUID driverUUID;
+    @Column(name = "pick_up_location")
     private String pickUpLocation;
+    @Column(name = "drop_off_location")
     private String dropOffLocation;
     @Enumerated(EnumType.STRING)
     private RideAssignmentStatus status;
