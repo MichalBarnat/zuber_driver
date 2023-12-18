@@ -2,11 +2,13 @@ package com.bbc.zuber.service;
 
 import com.bbc.zuber.exception.RideAssignmentNotFoundException;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
-import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
 import com.bbc.zuber.repository.RideAssignmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.ACCEPTED;
+import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.REJECTED;
 
 @Service
 @RequiredArgsConstructor
@@ -21,17 +23,17 @@ public class RideAssignmentService {
 
     @Transactional(readOnly = true)
     public RideAssignment findById(Long id) {
-        return rideAssignmentRepository.findById(id).orElseThrow(
-                () -> new RideAssignmentNotFoundException(String.format("RideAssignment with id %d not found!", id)));
+        return rideAssignmentRepository.findById(id)
+                .orElseThrow(() -> new RideAssignmentNotFoundException(id));
     }
 
     @Transactional
     public RideAssignment updateStatus(Long id, boolean accepted) {
         RideAssignment rideAssignment = findById(id);
         if (accepted) {
-            rideAssignment.setStatus(RideAssignmentStatus.ACCEPTED);
+            rideAssignment.setStatus(ACCEPTED);
         } else {
-            rideAssignment.setStatus(RideAssignmentStatus.REJECTED);
+            rideAssignment.setStatus(REJECTED);
         }
         return save(rideAssignment);
     }

@@ -1,8 +1,10 @@
 package com.bbc.zuber.exception;
 
-public class RideAssignmentNotFoundException extends RuntimeException{
+public class RideAssignmentNotFoundException extends RuntimeException {
 
-    public RideAssignmentNotFoundException(){}
+    private static final String ERROR_MESSAGE = "RideAssignment with id %d not found!";
 
-    public RideAssignmentNotFoundException(String message){super(message);}
+    public RideAssignmentNotFoundException(long id) {
+        super(String.format(ERROR_MESSAGE, id));
+    }
 }

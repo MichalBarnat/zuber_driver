@@ -6,18 +6,21 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
 
+import static jakarta.persistence.EnumType.STRING;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 public class CarDataCommand {
+
     private String brand;
     private String model;
     private int productionYear;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private TypeOfEngine engine;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     private TypeOfCar type;
     private int size;
     private String plateNum;
