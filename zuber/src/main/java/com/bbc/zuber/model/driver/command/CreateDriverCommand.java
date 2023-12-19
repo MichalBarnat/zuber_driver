@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -27,7 +29,7 @@ public class CreateDriverCommand {
     private String surname;
     @Past(message = "DOB_CANNOT_BE_FUTURE_OR_PRESENT")
     @NotNull(message = "DOB_NOT_NULL")
-    private String dob;
+    private LocalDate dob;
     @NotNull(message = "STATUS_DRIVER_NOT_NULL")
     private StatusDriver statusDriver;
     @NotNull(message = "SEX_NOT_NULL")

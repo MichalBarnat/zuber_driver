@@ -1,6 +1,5 @@
 package com.bbc.zuber.model.driver.command;
 
-import com.bbc.zuber.model.car.command.CarDataCommand;
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
 import com.bbc.zuber.validations.email.UniqueEmail;

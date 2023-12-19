@@ -34,7 +34,7 @@ public class CreateDriverCommandToDriverConverter implements Converter<CreateDri
                 .uuid(UUID.randomUUID())
                 .name(command.getName())
                 .surname(command.getSurname())
-                .dob(LocalDate.parse(command.getDob()))
+                .dob(command.getDob())
                 .statusDriver(command.getStatusDriver())
                 .sex(command.getSex())
                 .email(command.getEmail())

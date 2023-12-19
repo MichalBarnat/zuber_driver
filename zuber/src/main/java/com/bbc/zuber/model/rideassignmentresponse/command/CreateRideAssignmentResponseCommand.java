@@ -12,6 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateRideAssignmentResponseCommand {
-
     private Boolean accepted;
 }

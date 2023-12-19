@@ -97,6 +97,4 @@ public class DriverService {
         driver.setStatusDriver(statusDriver);
     }
 
-    // TODO szukanie dostepnych driverow dla danego przejazdu
-
 }
