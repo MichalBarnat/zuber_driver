@@ -86,10 +86,10 @@
         </createTable>
     </changeSet>
     <changeSet id="7" author="michal">
-        <createSequence sequenceName="ride_assignment_response_seq" incrementBy="1" startValue="1"/>
+        <createSequence sequenceName="ride_assignments_responses_seq" incrementBy="1" startValue="1"/>
     </changeSet>
     <changeSet id="8" author="michal">
-        <createTable tableName="ride_assignment_response">
+        <createTable tableName="ride_assignments_responses">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>

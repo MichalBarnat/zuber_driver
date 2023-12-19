@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "ride_assignment_response")
+@Entity(name = "ride_assignments_responses")
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class RideAssignmentResponse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ride_assignment_response_seq")
-    @SequenceGenerator(name = "ride_assignment_response_seq", sequenceName = "ride_assignment_response_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ride_assignments_responses_seq")
+    @SequenceGenerator(name = "ride_assignments_responses_seq", sequenceName = "ride_assignments_responses_seq", allocationSize = 1)
     private Long id;
     private Boolean accepted;
 }
