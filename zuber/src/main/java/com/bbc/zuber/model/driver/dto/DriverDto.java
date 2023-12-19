@@ -9,7 +9,6 @@ import java.util.UUID;
 @Value
 @Builder
 public class DriverDto {
-
     Long id;
     UUID uuid;
     String name;

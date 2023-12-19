@@ -37,6 +37,11 @@ public class RideAssignmentService {
             rideAssignment.setStatus(REJECTED);
         }
         save(rideAssignment);
-        return RideAssignmentUpdateStatusResponse.builder().message(String.format("Successfully update RideAssignment with id: %d",id)).build();
+        return RideAssignmentUpdateStatusResponse.builder().message(String.format("Successfully update RideAssignment with id: %d", id)).build();
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existById(Long id) {
+        return rideAssignmentRepository.existsById(id);
     }
 }

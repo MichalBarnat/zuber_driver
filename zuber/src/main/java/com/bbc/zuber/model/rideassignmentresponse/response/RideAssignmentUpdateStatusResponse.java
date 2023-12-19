@@ -12,6 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RideAssignmentUpdateStatusResponse {
-
     private String message;
 }

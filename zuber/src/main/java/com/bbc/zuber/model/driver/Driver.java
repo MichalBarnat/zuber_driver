@@ -3,11 +3,9 @@ package com.bbc.zuber.model.driver;
 import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -30,7 +28,6 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Driver {
-
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "driver_seq")
     @SequenceGenerator(name = "driver_seq", sequenceName = "drivers_seq", allocationSize = 1)

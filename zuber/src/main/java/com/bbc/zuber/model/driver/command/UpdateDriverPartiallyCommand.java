@@ -21,7 +21,6 @@ import static jakarta.persistence.EnumType.STRING;
 @Setter
 @Builder
 public class UpdateDriverPartiallyCommand {
-
     private String name;
     private String surname;
     private LocalDate dob;
@@ -33,5 +32,4 @@ public class UpdateDriverPartiallyCommand {
     @Email(message = "INCORRECT_EMAIL_FORMAT")
     private String email;
     private String location;
-//    private CarDataCommand carData;
 }

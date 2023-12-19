@@ -2,7 +2,6 @@ package com.bbc.zuber.model.car.command;
 
 import com.bbc.zuber.model.car.enums.TypeOfCar;
 import com.bbc.zuber.model.car.enums.TypeOfEngine;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
 
@@ -14,7 +13,6 @@ import static jakarta.persistence.EnumType.STRING;
 @Setter
 @Builder
 public class CarDataCommand {
-
     private String brand;
     private String model;
     private int productionYear;

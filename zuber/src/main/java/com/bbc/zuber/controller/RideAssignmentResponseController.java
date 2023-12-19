@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/rideAssignmentResponse")
@@ -27,9 +27,14 @@ public class RideAssignmentResponseController {
 
     @PostMapping
     public ResponseEntity<RideAssignmentUpdateStatusResponse> rideAssignmentResponse(@RequestBody @Valid CreateRideAssignmentResponseCommand command) {
+        if (!rideAssignmentService.existById(command.getRideAssignmentId())) {
+            return new ResponseEntity<>(RideAssignmentUpdateStatusResponse.builder().message("Wrong RideAssignment id!").build(), BAD_REQUEST);
+        }
+
         RideAssignmentResponse rideAssignmentResponse = modelMapper.map(command, RideAssignmentResponse.class);
+
         rideAssignmentResponseService.save(rideAssignmentResponse);
         RideAssignmentUpdateStatusResponse response = rideAssignmentService.updateStatus(command.getRideAssignmentId(), command.getAccepted());
-        return new ResponseEntity<>(response, OK);
+        return ResponseEntity.ok(response);
     }
 }

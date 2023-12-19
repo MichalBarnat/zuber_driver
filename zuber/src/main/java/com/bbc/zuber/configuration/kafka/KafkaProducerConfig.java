@@ -21,9 +21,9 @@ public class KafkaProducerConfig {
     private String bootstrapServer;
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-    public Map<String, Object> producerConfig(){
+    public Map<String, Object> producerConfig() {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

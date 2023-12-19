@@ -11,7 +11,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 public class CarDto {
-
     Long id;
     UUID uuid;
     String brand;

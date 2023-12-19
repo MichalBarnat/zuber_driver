@@ -23,7 +23,6 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RideAssignment {
-
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "ride_assignments_seq")
     @SequenceGenerator(name = "ride_assignments_seq", sequenceName = "ride_assignments_seq", allocationSize = 1)

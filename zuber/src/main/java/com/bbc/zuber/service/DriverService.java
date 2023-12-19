@@ -66,7 +66,6 @@ public class DriverService {
                     Optional.ofNullable(command.getSex()).ifPresent(driverToEdit::setSex);
                     Optional.ofNullable(command.getEmail()).ifPresent(driverToEdit::setEmail);
                     Optional.ofNullable(command.getLocation()).ifPresent(driverToEdit::setLocation);
-//                    Optional.ofNullable(command.getCar()).ifPresent(driverToEdit::setCar);
                     return driverToEdit;
                 })
                 .orElseThrow(() -> new DriverNotFoundException(id));

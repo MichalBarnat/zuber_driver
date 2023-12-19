@@ -1,5 +1,6 @@
 package com.bbc.zuber.kafka;
 
+import com.bbc.zuber.exception.KafkaSerializationException;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.rideassignmentresponse.RideAssignmentResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,7 +21,7 @@ public class KafkaProducerService {
             String savedDriverJson = objectMapper.writeValueAsString(savedDriver);
             kafkaTemplate.send("driver-registration", savedDriverJson);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new KafkaSerializationException();
         }
     }
 
@@ -29,7 +30,7 @@ public class KafkaProducerService {
             String editedDriverJson = objectMapper.writeValueAsString(editedDriver);
             kafkaTemplate.send("driver-edited", editedDriverJson);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new KafkaSerializationException();
         }
     }
 
@@ -38,7 +39,7 @@ public class KafkaProducerService {
             String responseJson = objectMapper.writeValueAsString(response);
             kafkaTemplate.send("ride-assignment-response", responseJson);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new KafkaSerializationException();
         }
     }
 }

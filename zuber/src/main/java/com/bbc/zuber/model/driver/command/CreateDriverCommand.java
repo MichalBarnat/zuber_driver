@@ -22,7 +22,6 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class CreateDriverCommand {
-
     @NotBlank(message = "NAME_NOT_BLANK")
     private String name;
     @NotBlank(message = "SURNAME_NOT_BLANK")

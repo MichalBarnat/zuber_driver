@@ -5,7 +5,6 @@ import com.bbc.zuber.model.car.enums.TypeOfEngine;
 import com.bbc.zuber.model.driver.Driver;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

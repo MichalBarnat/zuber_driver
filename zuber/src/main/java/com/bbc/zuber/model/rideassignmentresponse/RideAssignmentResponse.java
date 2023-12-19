@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RideAssignmentResponse {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ride_assignments_responses_seq")
     @SequenceGenerator(name = "ride_assignments_responses_seq", sequenceName = "ride_assignments_responses_seq", allocationSize = 1)
