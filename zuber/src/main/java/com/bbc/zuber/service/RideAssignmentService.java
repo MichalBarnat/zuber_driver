@@ -2,6 +2,7 @@ package com.bbc.zuber.service;
 
 import com.bbc.zuber.exception.RideAssignmentNotFoundException;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
+import com.bbc.zuber.model.rideassignmentresponse.response.RideAssignmentUpdateStatusResponse;
 import com.bbc.zuber.repository.RideAssignmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,14 @@ public class RideAssignmentService {
     }
 
     @Transactional
-    public RideAssignment updateStatus(Long id, boolean accepted) {
+    public RideAssignmentUpdateStatusResponse updateStatus(Long id, boolean accepted) {
         RideAssignment rideAssignment = findById(id);
         if (accepted) {
             rideAssignment.setStatus(ACCEPTED);
         } else {
             rideAssignment.setStatus(REJECTED);
         }
-        return save(rideAssignment);
+        save(rideAssignment);
+        return RideAssignmentUpdateStatusResponse.builder().message(String.format("Successfully update RideAssignment with id: %d",id)).build();
     }
 }

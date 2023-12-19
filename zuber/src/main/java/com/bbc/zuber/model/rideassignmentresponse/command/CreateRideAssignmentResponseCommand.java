@@ -1,5 +1,6 @@
 package com.bbc.zuber.model.rideassignmentresponse.command;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,5 +13,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateRideAssignmentResponseCommand {
+    private Long rideAssignmentId;
     private Boolean accepted;
 }

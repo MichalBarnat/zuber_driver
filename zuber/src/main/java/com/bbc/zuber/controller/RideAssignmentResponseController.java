@@ -4,6 +4,7 @@ import com.bbc.zuber.model.rideassignmentresponse.RideAssignmentResponse;
 import com.bbc.zuber.model.rideassignmentresponse.command.CreateRideAssignmentResponseCommand;
 import com.bbc.zuber.model.rideassignmentresponse.response.RideAssignmentUpdateStatusResponse;
 import com.bbc.zuber.service.RideAssignmentResponseService;
+import com.bbc.zuber.service.RideAssignmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,13 +21,15 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class RideAssignmentResponseController {
 
+    private final RideAssignmentService rideAssignmentService;
     private final RideAssignmentResponseService rideAssignmentResponseService;
     private final ModelMapper modelMapper;
 
     @PostMapping
     public ResponseEntity<RideAssignmentUpdateStatusResponse> rideAssignmentResponse(@RequestBody @Valid CreateRideAssignmentResponseCommand command) {
-        RideAssignmentResponse response = modelMapper.map(command, RideAssignmentResponse.class);
-        RideAssignmentUpdateStatusResponse statusResponse = rideAssignmentResponseService.processAndSave(response);
-        return new ResponseEntity<>(statusResponse, OK);
+        RideAssignmentResponse rideAssignmentResponse = modelMapper.map(command, RideAssignmentResponse.class);
+        rideAssignmentResponseService.save(rideAssignmentResponse);
+        RideAssignmentUpdateStatusResponse response = rideAssignmentService.updateStatus(command.getRideAssignmentId(), command.getAccepted());
+        return new ResponseEntity<>(response, OK);
     }
 }

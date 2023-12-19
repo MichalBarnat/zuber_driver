@@ -93,6 +93,9 @@
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
+            <column name="ride_assignment_id" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
             <column name="accepted" type="BOOLEAN">
                 <constraints nullable="true"/>
             </column>
