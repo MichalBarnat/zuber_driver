@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.ACCEPTED;
+import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.CANCELLED;
 import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.REJECTED;
 
 @Service
@@ -31,6 +32,9 @@ public class RideAssignmentService {
     @Transactional
     public RideAssignmentUpdateStatusResponse updateStatus(Long id, boolean accepted) {
         RideAssignment rideAssignment = findById(id);
+        if(rideAssignment.getStatus() == CANCELLED) {
+            return RideAssignmentUpdateStatusResponse.builder().message("Can't do nothing because Ride was CANCELLED!").build();
+        }
         if (accepted) {
             rideAssignment.setStatus(ACCEPTED);
         } else {
