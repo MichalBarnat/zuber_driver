@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.ACCEPTED;
+import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.CANCELLED;
 import static com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus.REJECTED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -71,6 +72,25 @@ class RideAssignmentServiceTest {
         verify(rideAssignmentRepository, times(1)).findById(rideAssignmentId);
 
         assertEquals(rideAssignment, result);
+    }
+
+    @Test
+    void shouldUpdateStatusForRideAssignmentWhenStatusIsCancelled() {
+        //Given
+        long rideAssignmentId = 1L;
+        rideAssignment.setStatus(CANCELLED);
+
+        when(rideAssignmentRepository.findById(rideAssignmentId))
+                .thenReturn(Optional.of(rideAssignment));
+
+        //When
+        RideAssignmentUpdateStatusResponse result = rideAssignmentService.updateStatus(rideAssignmentId, true);
+
+        //Then
+        verify(rideAssignmentRepository, times(1)).findById(rideAssignmentId);
+        verify(rideAssignmentRepository, never()).save(any(RideAssignment.class));
+
+        assertEquals("Can't do nothing because Ride was CANCELLED!", result.getMessage());
     }
 
     @Test

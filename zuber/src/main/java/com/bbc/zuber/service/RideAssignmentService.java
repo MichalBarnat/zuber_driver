@@ -32,7 +32,7 @@ public class RideAssignmentService {
     @Transactional
     public RideAssignmentUpdateStatusResponse updateStatus(Long id, boolean accepted) {
         RideAssignment rideAssignment = findById(id);
-        if(rideAssignment.getStatus() == CANCELLED) {
+        if (rideAssignment.getStatus() == CANCELLED) {
             return RideAssignmentUpdateStatusResponse.builder().message("Can't do nothing because Ride was CANCELLED!").build();
         }
         if (accepted) {
