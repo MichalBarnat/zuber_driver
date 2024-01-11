@@ -7,7 +7,6 @@ import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
@@ -18,7 +17,7 @@ public class CreateDriverCommandToDriverConverter implements Converter<CreateDri
         CreateDriverCommand command = mappingContext.getSource();
 
         Car car = null;
-        if(command.getCarData() != null) {
+        if (command.getCarData() != null) {
             car = new Car();
             car.setUuid(UUID.randomUUID());
             car.setBrand(command.getCarData().getBrand());

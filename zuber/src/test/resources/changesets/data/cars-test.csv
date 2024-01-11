@@ -1,0 +1,6 @@
+id,uuid,brand,model,production_year,engine,type,size,plate_num
+1,541f9c38-8c0b-4e9d-8212-93d56ca91484,Toyota,Corolla,2022,HYBRID,ECO,5,GDA12420
+2,fdf8b9d6-9fc8-4007-a23a-659ad4103e04,Honda,Civic,2002,DIESEL,STANDARD,5,BIA5432
+3,e2452860-32aa-4e14-b4ff-079a3f900d37,Ford,Mustang,2016,PETROL,PREMIUM,4,BL2240
+4,d2e102ee-0530-4b95-8458-037be3f1f1ab,Chevrolet,Impala,2010,HYBRID,STANDARD,7,PK2WZ7
+5,72f466e1-1202-4efe-8a9d-498cc513a8cc,Tesla,"Model 3",2023,ELECTRIC,PREMIUM,5,LZA5579

@@ -7,7 +7,7 @@ import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateDriverCommandToDriverConverter implements Converter<UpdateDriverPartiallyCommand, Driver> {
+public class UpdateDriverPartiallyCommandToDriverConverter implements Converter<UpdateDriverPartiallyCommand, Driver> {
 
     @Override
     public Driver convert(MappingContext<UpdateDriverPartiallyCommand, Driver> mappingContext) {
