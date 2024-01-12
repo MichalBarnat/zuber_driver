@@ -43,6 +43,11 @@ public class DriverService {
         return driverRepository.findAllWithCar(pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<Driver> findAllDeleted(Pageable pageable) {
+        return driverRepository.findAllDeleted(pageable);
+    }
+
     @Transactional
     public DriverResponse deleteById(Long id) {
         Driver driver = driverRepository.findById(id)

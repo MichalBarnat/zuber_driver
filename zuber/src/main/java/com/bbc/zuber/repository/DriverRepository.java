@@ -13,5 +13,8 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Query(value = "SELECT DISTINCT d FROM drivers d LEFT JOIN FETCH d.car")
     Page<Driver> findAllWithCar(Pageable pageable);
 
+    @Query(value = "SELECT * FROM Drivers d WHERE d.is_deleted = true", nativeQuery = true)
+    Page<Driver> findAllDeleted(Pageable pageable);
+
     boolean existsByEmail(String email);
 }

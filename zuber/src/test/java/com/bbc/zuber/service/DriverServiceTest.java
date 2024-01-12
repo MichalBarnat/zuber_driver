@@ -50,7 +50,7 @@ class DriverServiceTest {
 
         driver = new Driver(1L, UUID.randomUUID(), "Test",
                 "Test", LocalDate.of(2000, 1, 1),
-                AVAILABLE, MALE, "test.t@example.com", "Test", new Car());
+                AVAILABLE, MALE, "test.t@example.com", "Test", new Car(), false);
     }
 
     @Test
@@ -112,6 +112,31 @@ class DriverServiceTest {
         verify(driverRepository, times(1)).findAllWithCar(pageable);
 
         assertEquals(expectedDrivers.size(), result.getContent().size());
+    }
+
+    @Test
+    void shouldFindAllDeletedDrivers() {
+        //Given
+        Pageable pageable = Pageable.ofSize(5).withPage(0);
+
+        Driver driver2 = new Driver();
+        driver.setIsDeleted(true);
+        driver2.setIsDeleted(true);
+
+        List<Driver> deletedDrivers = new ArrayList<>();
+        deletedDrivers.add(driver);
+        deletedDrivers.add(driver2);
+
+        when(driverRepository.findAllDeleted(pageable))
+                .thenReturn(new PageImpl<>(deletedDrivers));
+
+        //When
+        Page<Driver> result = driverService.findAllDeleted(pageable);
+
+        //Then
+        verify(driverRepository, times(1)).findAllDeleted(pageable);
+        assertEquals(driver, result.getContent().get(0));
+        assertEquals(driver2, result.getContent().get(1));
     }
 
     @Test

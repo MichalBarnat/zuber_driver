@@ -50,6 +50,13 @@ public class DriverController {
         return new ResponseEntity<>(dtos, OK);
     }
 
+    @GetMapping("/deleted")
+    public ResponseEntity<Page<DriverDto>> findAllDeleted(@PageableDefault Pageable pageable) {
+        Page<DriverDto> dtos = driverService.findAllDeleted(pageable)
+                .map(driver -> modelMapper.map(driver, DriverDto.class));
+        return new ResponseEntity<>(dtos, OK);
+    }
+
     @PostMapping
     public ResponseEntity<DriverDto> save(@RequestBody @Valid CreateDriverCommand command) {
         Driver driverToSave = modelMapper.map(command, Driver.class);

@@ -108,6 +108,54 @@ class DriverControllerIT {
     }
 
     @Test
+    void shouldFindAllDeletedDrivers() throws Exception {
+        //Given
+        postman.perform(get("/api/drivers/4"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(4))
+//                .andExpect(jsonPath("$.uuid").value("ce7a9a6e-b4fd-4a1d-8e79-ea5a3e2d6d95"))
+                .andExpect(jsonPath("$.name").value("Sara"))
+                .andExpect(jsonPath("$.sex").value("FEMALE"))
+                .andExpect(jsonPath("$.location").value("Aleja Wolności 12, 62-800 Kalisz"));
+
+        postman.perform(get("/api/drivers/5"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(5))
+//                .andExpect(jsonPath("$.uuid").value("a5c8d2f9-2f4a-4b5d-9b5c-1af0e4f7a24e"))
+                .andExpect(jsonPath("$.name").value("Dobromir"))
+                .andExpect(jsonPath("$.sex").value("MALE"))
+                .andExpect(jsonPath("$.location").value("Śląska 55A, 22-400 Zamość"));
+
+        //When
+        postman.perform(delete("/api/drivers/4"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        postman.perform(delete("/api/drivers/5"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        //Then
+        postman.perform(get("/api/drivers/deleted")
+                        .param("size", "5")
+                        .param("page", "0"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id").value(4))
+//                .andExpect(jsonPath("$.content[0].uuid").value("ce7a9a6e-b4fd-4a1d-8e79-ea5a3e2d6d95"))
+                .andExpect(jsonPath("$.content[0].name").value("Sara"))
+                .andExpect(jsonPath("$.content[0].sex").value("FEMALE"))
+                .andExpect(jsonPath("$.content[0].location").value("Aleja Wolności 12, 62-800 Kalisz"))
+                .andExpect(jsonPath("$.content[1].id").value(5))
+//                .andExpect(jsonPath("$.content[1].uuid").value("a5c8d2f9-2f4a-4b5d-9b5c-1af0e4f7a24e"))
+                .andExpect(jsonPath("$.content[1].name").value("Dobromir"))
+                .andExpect(jsonPath("$.content[1].sex").value("MALE"))
+                .andExpect(jsonPath("$.content[1].location").value("Śląska 55A, 22-400 Zamość"));
+    }
+
+    @Test
     void shouldSaveDriver() throws Exception {
         //Given
         CarDataCommand carCommand = CarDataCommand.builder()

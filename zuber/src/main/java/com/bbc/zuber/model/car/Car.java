@@ -15,18 +15,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.util.UUID;
 
 import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "cars")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SQLDelete(sql = "UPDATE cars SET is_deleted = true WHERE id=?")
+@SQLRestriction("is_deleted = false")
 public class Car {
 
     @Id
@@ -43,8 +48,10 @@ public class Car {
     private TypeOfCar type;
     private int size;
     private String plateNum;
-    @OneToOne(cascade = ALL)
+    @OneToOne
     @JoinColumn(name = "DRIVER_UUID", referencedColumnName = "uuid")
     @JsonIgnore
     private Driver driver;
+    @Builder.Default
+    private Boolean isDeleted = false;
 }

@@ -14,11 +14,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.MERGE;
+import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -27,7 +31,10 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE drivers SET is_deleted = true WHERE id=?")
+@SQLRestriction("is_deleted = false")
 public class Driver {
+
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "driver_seq")
     @SequenceGenerator(name = "driver_seq", sequenceName = "drivers_seq", allocationSize = 1)
@@ -42,7 +49,9 @@ public class Driver {
     private Sex sex;
     private String email;
     private String location;
-    @OneToOne(cascade = ALL)
+    @OneToOne(cascade = {PERSIST, MERGE, REMOVE})
     @JoinColumn(name = "CAR_UUID", referencedColumnName = "uuid")
     private Car car;
+    @Builder.Default
+    private Boolean isDeleted = false;
 }

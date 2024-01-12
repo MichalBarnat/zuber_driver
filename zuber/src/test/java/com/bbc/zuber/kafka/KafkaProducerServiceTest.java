@@ -44,7 +44,7 @@ class KafkaProducerServiceTest {
 
         driver = new Driver(1L, UUID.randomUUID(), "Test", "Test",
                 LocalDate.of(2000,1,1), AVAILABLE,
-                MALE, "test.t@example.com", "Test", new Car());
+                MALE, "test.t@example.com", "Test", new Car(), false);
     }
 
     @Test

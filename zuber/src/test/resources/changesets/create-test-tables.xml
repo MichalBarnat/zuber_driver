@@ -22,6 +22,9 @@
             <column name="driver_uuid" type="UUID">
                 <constraints nullable="true"/>
             </column>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="2_test" author="michal-barnat">
@@ -42,6 +45,9 @@
             <column name="car_uuid" type="UUID">
                 <constraints nullable="true"/>
             </column>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <!-- Dodawanie klucza obcego do tabeli cars -->
@@ -50,7 +56,9 @@
                                  baseColumnNames="driver_uuid"
                                  constraintName="fk_cars_driver"
                                  referencedTableName="drivers"
-                                 referencedColumnNames="uuid"/>
+                                 referencedColumnNames="uuid"
+                                 onDelete="NO ACTION"
+                                 onUpdate="CASCADE"/>
     </changeSet>
 
     <!-- Dodawanie klucza obcego do tabeli drivers -->
@@ -59,7 +67,9 @@
                                  baseColumnNames="car_uuid"
                                  constraintName="fk_drivers_car"
                                  referencedTableName="cars"
-                                 referencedColumnNames="uuid"/>
+                                 referencedColumnNames="uuid"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
     <changeSet id="5_test" author="michal">
         <createSequence sequenceName="ride_assignments_seq" incrementBy="1" startValue="1"/>
