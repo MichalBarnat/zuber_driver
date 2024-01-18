@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateRideAssignmentResponseCommand {
+
     private Long rideAssignmentId;
     private Boolean accepted;
 }
