@@ -5,7 +5,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="michal" id="1_test">
-        <loadData encoding="UTF-8" file="changesets/data/cars-test.csv" quotchar="&quot;" separator="," tableName="cars">
+        <loadData encoding="UTF-8" file="changesets/data/cars-test.csv" quotchar="&quot;" separator=","
+                  tableName="cars">
             <column header="id" name="id"/>
             <column header="uuid" name="uuid"/>
             <column header="brand" name="brand"/>
@@ -17,8 +18,10 @@
             <column header="plate_num" name="plate_num"/>
         </loadData>
     </changeSet>
+
     <changeSet author="michal" id="2_test">
-        <loadData encoding="UTF-8" file="changesets/data/drivers-test.csv" quotchar="&quot;" separator="," tableName="drivers">
+        <loadData encoding="UTF-8" file="changesets/data/drivers-test.csv" quotchar="&quot;" separator=","
+                  tableName="drivers">
             <column header="id" name="id"/>
             <column header="uuid" name="uuid"/>
             <column header="name" name="name"/>
@@ -30,6 +33,7 @@
             <column header="location" name="location"/>
         </loadData>
     </changeSet>
+
     <!-- Dodanie kluczy obcych do tabeli cars -->
     <changeSet author="michal" id="3_test">
         <sql>
@@ -51,7 +55,6 @@
             UPDATE drivers SET car_uuid = '72f466e1-1202-4efe-8a9d-498cc513a8cc' WHERE id = 5;
         </sql>
     </changeSet>
-
 
     <changeSet id="5_test" author="michal">
         <sql>
@@ -77,6 +80,41 @@
         </sql>
     </changeSet>
 
+    <changeSet id="9_1_test" author="michal">
+        <loadData encoding="UTF-8" file="changesets/data/ride_assignments.csv" quotchar="&quot;" separator=","
+                  tableName="ride_assignments">
+            <column header="id" name="id"/>
+            <column header="uuid" name="uuid"/>
+            <column header="rideRequestUUID" name="ride_request_uuid"/>
+            <column header="driverUUID" name="driver_uuid"/>
+            <column header="pickUpLocation" name="pick_up_location"/>
+            <column header="dropOffLocation" name="drop_off_location"/>
+            <column header="status" name="status"/>
+        </loadData>
+    </changeSet>
 
+    <!--- UPDATE SEQUENCE NUMBER AFTER ADDING TESTING DATA -->
+    <changeSet id="9_2_test" author="michal">
+        <sql>
+            ALTER SEQUENCE ride_assignments_seq RESTART WITH COALESCE((SELECT MAX(id)+1 FROM ride_assignments), 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="10_1_test" author="michal_b">
+        <loadData encoding="UTF-8" file="changesets/data/ride_assignments_responses.csv" quotchar="&quot;" separator=","
+                  tableName="ride_assignments_responses">
+            <column header="id" name="id"/>
+            <column header="rideAssignmentId" name="ride_assignment_id"/>
+            <column header="status" name="status"/>
+        </loadData>
+    </changeSet>
+
+    <!--- UPDATE SEQUENCE NUMBER AFTER ADDING TESTING DATA -->
+    <changeSet id="10_2_test" author="michal">
+        <sql>
+            ALTER SEQUENCE ride_assignments_responses_seq RESTART WITH COALESCE((SELECT MAX(id)+1 FROM
+            ride_assignments_responses), 1);
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>

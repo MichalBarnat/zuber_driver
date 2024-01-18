@@ -1,0 +1,6 @@
+id,uuid,ride_request_uuid,driver_uuid,pick_up_location,drop_off_location,status
+1,888e3333-e89b-12d3-a456-426614174001,123e4567-e89b-12d3-a456-426614174091,a5c8d2f9-2f4a-4b5d-9b5c-1af0e4f7a24e,"Jęczydół 16, 73-108 Jęczydół","Szczecińska 15B, 73-108 Morzyczyn",ACCEPTED
+2,888e3333-e89b-12d3-a456-426614174002,123e4567-e89b-12d3-a456-426614174092,7e5a77fd-8f73-4d29-8c8c-1f96e0b4e3d7,"Zjazd 15a, 18-400 Łomża","Marianowo 7, 18-421 Marianowo",ACCEPTED
+3,888e3333-e89b-12d3-a456-426614174003,123e4567-e89b-12d3-a456-426614174093,b2a5b5e3-aa1c-4e4b-8f3b-088b656047b3,"Poznańska 99, 62-800 Kalisz","Popówek 6, 63-322 Popówek",ACCEPTED
+4,888e3333-e89b-12d3-a456-426614174004,123e4567-e89b-12d3-a456-426614174094,3f7ae1f2-4bfb-4c9f-a5c9-4d0d8b7c2e88,"Malownicza 16, 22-400 Zamość","Generała Władysława Sikorskiego 9, 22-400 Zamość",ACCEPTED
+5,888e3333-e89b-12d3-a456-426614174005,123e4567-e89b-12d3-a456-426614174095,a5c8d2f9-2f4a-4b5d-9b5c-1af0e4f7a24e,"Bolesława Krzywoustego 8, 73-110 Stargard","Gdyńska 28, 73-110 Stargard",ACCEPTED

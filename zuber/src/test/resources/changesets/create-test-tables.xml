@@ -27,6 +27,7 @@
             </column>
         </createTable>
     </changeSet>
+
     <changeSet id="2_test" author="michal-barnat">
         <createTable tableName="drivers">
             <column name="id" type="BIGINT">
@@ -50,8 +51,9 @@
             </column>
         </createTable>
     </changeSet>
+
     <!-- Dodawanie klucza obcego do tabeli cars -->
-    <changeSet id="3" author="michal-barnat">
+    <changeSet id="3_test" author="michal-barnat">
         <addForeignKeyConstraint baseTableName="cars"
                                  baseColumnNames="driver_uuid"
                                  constraintName="fk_cars_driver"
@@ -71,9 +73,11 @@
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"/>
     </changeSet>
+
     <changeSet id="5_test" author="michal">
         <createSequence sequenceName="ride_assignments_seq" incrementBy="1" startValue="1"/>
     </changeSet>
+
     <changeSet id="6_test" author="michal">
         <createTable tableName="ride_assignments">
             <column name="id" type="BIGINT">
@@ -95,9 +99,11 @@
             </column>
         </createTable>
     </changeSet>
+
     <changeSet id="7_test" author="michal">
         <createSequence sequenceName="ride_assignments_responses_seq" incrementBy="1" startValue="1"/>
     </changeSet>
+
     <changeSet id="8_test" author="michal">
         <createTable tableName="ride_assignments_responses">
             <column name="id" type="BIGINT">
