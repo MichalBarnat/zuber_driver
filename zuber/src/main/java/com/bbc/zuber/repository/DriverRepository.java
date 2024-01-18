@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Long> {
 
@@ -17,4 +20,6 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     Page<Driver> findAllDeleted(Pageable pageable);
 
     boolean existsByEmail(String email);
+
+    Optional<Driver> findByUuid(UUID uuid);
 }
